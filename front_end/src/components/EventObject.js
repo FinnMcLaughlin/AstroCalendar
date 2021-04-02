@@ -11,7 +11,7 @@ export class EventObject extends Component {
 
     render() {
         const { event_name, event_date, id } = this.props.event_info;
-
+        
         return (
             <div style= { this.getStyle() }>
                 <h2>{event_name}</h2>

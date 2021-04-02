@@ -3,12 +3,9 @@ import React, { Component } from 'react'
 import Header from './components/layout/Header.js'
 import Events from './components/Events.js'
 import About from './components/pages/About.js'
-//import Scraper from './components/Scraper.js'
 import './App.css'
 
-//const request = require('request')
-//const Cheerio = require('cheerio')
-const axios = require('axios')
+const request = require('request')
 
 class App extends Component {
   state = {
@@ -16,26 +13,19 @@ class App extends Component {
   }
 
   componentDidMount(){
-    console.log("Fetching")
-
-
-    axios("http://localhost:5000/events").then((response) =>{
-      console.log(response.data);
-    })
-
-    /*fetch("http://localhost:5000/events", {
-        mode: 'no-cors',
-        method: 'GET',
-        headers: {
-        Accept: 'application/json',
-      }
-    }).then((response) =>{
-      console.log(response);
-    })*/
+    console.log("Component Mounted")
+    //this.scrapeEvents()
   }
 
-
-
+  // Function to request the backend server to scrape the events from the given url 
+  scrapeEvents = () => {
+      request('http://localhost:5000/events', (err, resp, html) =>{
+        if(!err && resp.statusCode === 200){
+          console.log(html)
+          this.setState({events: JSON.parse(html)})
+        }
+      })
+  }
 
   //Toggle set reminder on event
   setReminder = (id) => {
@@ -45,7 +35,8 @@ class App extends Component {
         if(event.id === id){
           event.reminder_set = event.reminder_set ? false : true; 
         }
-        return event;  
+        return event;
+
       })
     })
   }
@@ -60,6 +51,8 @@ class App extends Component {
             <Route exact path="/" render={props => (
               <React.Fragment>
                 <Header />
+                {/* Temporary Web Scrape Button */}
+                <button onClick={this.scrapeEvents}>Get Events</button>
                 <Events event_list={this.state.events} setReminder={this.setReminder}/> 
               </React.Fragment>
             )}/>
