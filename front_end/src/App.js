@@ -27,6 +27,15 @@ class App extends Component {
       })
   }
 
+  // Test function to set reminder based on hard-coded event details on the backend server 
+  set_event_reminder = () => {
+    request('http://localhost:5000/reminder', (err, resp, html) =>{
+      if(!err && resp.statusCode === 200){
+        console.log(html)
+      }
+    })
+}
+
   //Toggle set reminder on event
   setReminder = (id) => {
     this.setState({
@@ -53,6 +62,7 @@ class App extends Component {
                 <Header />
                 {/* Temporary Web Scrape Button */}
                 <button onClick={this.scrapeEvents}>Get Events</button>
+                <button onClick={this.set_event_reminder}>Set Reminder</button>
                 <Events event_list={this.state.events} setReminder={this.setReminder}/> 
               </React.Fragment>
             )}/>
