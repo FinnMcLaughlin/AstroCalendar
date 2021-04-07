@@ -16,7 +16,7 @@ export class EventObject extends Component {
             <div style= { this.getStyle() }>
                 <h2>{event_name}</h2>
                 <h3>{event_date}</h3>
-                <input type="checkbox" onChange={this.props.setReminder.bind(this, id)} />
+                <button onClick={this.props.setReminder.bind(this, id)}>Create Reminder</button>
             </div>
         )
     }

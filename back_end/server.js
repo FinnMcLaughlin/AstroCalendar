@@ -3,7 +3,10 @@ const Cheerio = require('cheerio')
 
 const { google } = require('googleapis')
 const { OAuth2 }  = google.auth
-const OAuth2Client = new OAuth2('<CLIENT ID>', '<SECRET ID>')
+const OAuth2Client = new OAuth2(
+    '<CLIENT ID>',
+    '<SECRET ID>'
+    )
 
 const calendar = google.calendar({
     version: 'v3',
@@ -16,10 +19,12 @@ OAuth2Client.setCredentials({
 
 const express = require('express')
 const cors = require('cors')
+const bodyParser = require('body-parser')
 const app = express()
 const port = 5000
 
 app.use(cors())
+app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
     res.send("Hello There")
@@ -69,35 +74,13 @@ app.get("/events", (req, res) => {
 })
 
 // Creates a google calendar event based on the given hard-coded details
-app.get("/reminder", (req, res) => {
+app.post("/reminder", (req, res) => {
+
+    const event_object = req.body
+    const event_start_time = event_object.start.dateTime
+    const event_end_time = event_object.end.dateTime
+
     
-    // Set start and end time for event
-    const event_start_time = new Date()
-    event_start_time.setDate(event_start_time.getDate() + 2)
-    event_start_time.setMinutes(event_start_time.getMinutes())
-
-    console.log("Current Day: " + event_start_time.getDate())
-
-    const event_end_time = new Date()
-    event_end_time.setDate(event_end_time.getDate() + 2)
-    event_end_time.setMinutes(event_end_time.getMinutes() + 30)
-
-    // Create event object
-    const event = {
-        summary: 'Get an Apfeltasche',
-        location: 'Kurfürstendamm 142, 10709 Berlin',
-        description: 'Buy one so you can eat it',
-        start: {
-            dateTime: event_start_time,
-            timezone: 'Europe/Berlin'
-        },
-        end: {
-            dateTime: event_end_time,
-            timezone: 'Europe/Berlin'
-        },
-        colorId: 1
-    }
-
     // Checks for bookings made at this time to prevent double booking
     calendar.freebusy.query({resource: {
         timeMin: event_start_time,
@@ -111,7 +94,7 @@ app.get("/reminder", (req, res) => {
 
         if(eventsArr.length === 0) return calendar.events.insert({
             calendarId: 'primary',
-            resource: event
+            resource: event_object
         }, (err) => {
             if (err) return console.error("Calendar event creation error: ", err)
 
