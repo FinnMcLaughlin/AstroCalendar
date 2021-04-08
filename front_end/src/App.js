@@ -35,38 +35,78 @@ class App extends Component {
 
   // Function to create event object based on given event details
   create_event_object = (event) => {
-      const start_time = new Date(event.event_date + " 2021")
-      start_time.setHours(19)
 
-      const end_time = new Date(event.event_date + " 2021")
-      end_time.setHours(start_time.getHours() + 10)
+    // If event takes place over multiple dates
+    if(event.event_date.includes("/")){
 
-      return {
-        summary: event.event_name,
-        description: event.event_details,
-        start: {
-          dateTime: start_time,
-          timezone: 'Europe/Berlin',
-        },
-        end: {
-          dateTime: end_time,
-          timezone: 'Europe/Berlin',
-        }
+      var event_1 = Object.assign({}, event)
+      var event_2 = Object.assign({}, event)
+
+      event_1.event_date = event.event_date.split("/")[0]
+      event_2.event_date = event.event_date.split(" ")[0] + " " + event.event_date.split("/")[1]
+      
+      return [this.create_event_object(event_1), this.create_event_object(event_2)]
+    }
+
+    const start_time = new Date(event.event_date + " 2021")
+    start_time.setHours(19)
+
+    const end_time = new Date(event.event_date + " 2021")
+    end_time.setHours(start_time.getHours() + 10)
+
+    return {
+      summary: event.event_name,
+      description: event.event_details,
+      start: {
+        dateTime: start_time,
+        timezone: 'Europe/Berlin',
+      },
+      end: {
+        dateTime: end_time,
+        timezone: 'Europe/Berlin',
+      },
+      reminders: {
+        useDefault: false,
+        overrides: [
+          {
+            method: "popup",
+            minutes: 1440 
+          },
+          {
+            method: "popup",
+            minutes: 60 
+          }
+        ]
       }
+    }
+  }
+
+  // Function to send reminder creation request to the backend server
+  send_event_request = (event_req) => {
+    axios.post(LOCALHOST + '/reminder', event_req).then((resp) => {
+      if(resp.status === 200){
+        return console.log(resp)
+      }
+    }).catch((err) => {
+      return console.error("Error: ", err)
+    })
   }
 
   //Create calendar event reminder for specified event
   setReminder = (id) => {
-
     this.state.events.forEach((event) => {
+
       if(event.id === id){
-        axios.post(LOCALHOST + '/reminder', this.create_event_object(event)).then((resp) => {
-          if(resp.status === 200){
-            return console.log(resp)
-          }
-        }).catch((err) => {
-          return console.error("Error: ", err)
-        })
+        
+        var event_object = this.create_event_object(event)
+
+        if(!Array.isArray(event_object)){
+          event_object = [event_object]
+        }
+
+        event_object.forEach(event => {
+          this.send_event_request(event)
+        });
       }
     })
 
