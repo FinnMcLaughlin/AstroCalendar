@@ -13,7 +13,7 @@ export class EventObject extends Component {
         const { event_name, event_date, id } = this.props.event_info;
         
         return (
-            <div style= { this.getStyle() }>
+            <div data-testid="event-obj-div" style= { this.getStyle() }>
                 <h2>{event_name}</h2>
                 <h3>{event_date}</h3>
                 <button onClick={this.props.setReminder.bind(this, id)}>Create Reminder</button>

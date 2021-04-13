@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders event object 1`] = `
+<div
+  data-testid="event-obj-div"
+  style="background-color: rgb(219, 22, 22);"
+>
+  <h2>
+    St. Patricks Day
+  </h2>
+  <h3>
+    17/03/2021
+  </h3>
+  <button>
+    Create Reminder
+  </button>
+</div>
+`;
