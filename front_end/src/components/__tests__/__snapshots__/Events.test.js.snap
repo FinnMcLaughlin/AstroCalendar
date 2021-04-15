@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders all events correctly 1`] = `
+Array [
+  <div
+    data-testid="event-obj-div"
+    style="background-color: rgb(219, 22, 22);"
+  >
+    <h2>
+      St. Patricks Day
+    </h2>
+    <h3>
+      17/03/2021
+    </h3>
+    <button>
+      Create Reminder
+    </button>
+  </div>,
+  <div
+    data-testid="event-obj-div"
+    style="background-color: rgb(244, 244, 244);"
+  >
+    <h2>
+      Halloween
+    </h2>
+    <h3>
+      31/10/2021
+    </h3>
+    <button>
+      Create Reminder
+    </button>
+  </div>,
+]
+`;

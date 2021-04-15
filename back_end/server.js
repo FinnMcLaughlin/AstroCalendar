@@ -14,6 +14,7 @@ const calendar = google.calendar({
 })
 
 OAuth2Client.setCredentials({
+    access_token: '<ACCESS TOKEN>',
     refresh_token: '<REFRESH TOKEN>'
 })
 
@@ -100,7 +101,8 @@ app.post("/reminder", (req, res) => {
 
             console.log("Calendar event created!")
 
-            return res.send("Calendar event created for: " + event_start_time) 
+            return res.send("Calendar event created for: " + event_object.summary +
+            " at: " + event_start_time.split("T")[0] + " " + event_start_time.split("T")[1]) 
         })
 
         console.log("Calendar Event Busy for that date / time")

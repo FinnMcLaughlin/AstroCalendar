@@ -23,7 +23,7 @@ const test_event_reminders = []
 // Mock function to populate test_event_reminder array with the event object id when button clicked
 function setReminder(event_id){
     console.log("Reminder set for event: ", event_id)
-    test_event_reminders.push(event_id)
+    test_event_reminders.push({event_id: event_id})
 }
 
 test("renders event object", () => {
@@ -44,5 +44,13 @@ test("button sets reminder for correct event", () => {
     fireEvent.click(getByText(reminder_button_label))
 
     expect(test_event_reminders.length).toEqual(1)
-    expect(test_event_reminders).toContain(1)
+
+    expect(test_event_reminders).toContainEqual({"event_id": 1})
+
+    test_event_reminders.push({event_id: 3})
+
+    expect(test_event_reminders.length).toEqual(2)
+
+    expect(test_event_reminders).toContainEqual({"event_id": 1})
+    expect(test_event_reminders).toContainEqual({"event_id": 3})
 })
