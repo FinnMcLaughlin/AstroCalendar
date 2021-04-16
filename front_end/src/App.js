@@ -10,6 +10,11 @@ import './App.css'
 
 const LOCALHOST = 'http://localhost:5000'
 
+const endpoints = {
+  scrape_events: "/events",
+  event_req: "/reminder"
+}
+
 class App extends Component {
   state = {
     events: []
@@ -22,7 +27,7 @@ class App extends Component {
 
   // Function to request the backend server to scrape the events from the given url 
   scrapeEvents = () => {
-    ScrapeEvents(LOCALHOST).then((events_data) => {
+    ScrapeEvents(LOCALHOST + endpoints.scrape_events).then((events_data) => {
       console.log(events_data)
       this.setState({events: events_data})
     })
@@ -41,7 +46,7 @@ class App extends Component {
         }
 
         event_object.forEach(event => {
-          SendEventReq(LOCALHOST, event).then((resp) => {
+          SendEventReq(LOCALHOST + endpoints.event_req, event).then((resp) => {
             console.log(resp)
           })
         });

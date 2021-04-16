@@ -8,7 +8,7 @@ function CreateEventObject(event_info){
         event_1.event_date = event_info.event_date.split("/")[0]
         event_2.event_date = event_info.event_date.split(" ")[0] + " " + event_info.event_date.split("/")[1]
         
-        return [this.create_event_object(event_1), this.create_event_object(event_2)]
+        return [CreateEventObject(event_1), CreateEventObject(event_2)]
     }
 
     const start_time = new Date(event_info.event_date + " 2021")
