@@ -1,6 +1,6 @@
-const axios = require('axios')
+import axios from "axios";
 
-export default async function scrapeEvents(url){
+export default async function ScrapeEvents(url){
     console.log("Scraping Events")
 
     try{
@@ -8,7 +8,7 @@ export default async function scrapeEvents(url){
         return resp.data
     }
     catch(error){
-        console.log("Scrape Request Error: ")
+        console.log("Scrape Request Error: " + error)
         return error
     }
   }

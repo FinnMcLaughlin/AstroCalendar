@@ -58,7 +58,7 @@ class App extends Component {
   render(){
     return (
       <Router>
-        <div className="App">
+        <div data-testid="app-component" className="App">
           <div className="container">
             
             {/* Home Page */}
@@ -66,8 +66,10 @@ class App extends Component {
               <React.Fragment>
                 <Header />
                 {/* Temporary Web Scrape Button */}
-                <button onClick={this.scrapeEvents}>Get Events</button>
-                <Events event_list={this.state.events} setReminder={this.setReminder}/> 
+                <button data-testid="scrape-button" onClick={this.scrapeEvents}>Get Events</button>
+                <div data-testid="events-list">
+                  <Events event_list={this.state.events} setReminder={this.setReminder}/> 
+                </div>
               </React.Fragment>
             )}/>
 
