@@ -1,0 +1,136 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App Component renders 'About' page correctly 1`] = `
+<div
+  class="App"
+  data-testid="app-component"
+>
+  <div
+    class="container"
+  >
+    <header
+      data-testid="header-component"
+      style="background-color: black; color: white; padding-bottom: 10px;"
+    >
+      <h1>
+        Astro Calendar
+      </h1>
+      <a
+        href="/"
+        style="color: white;"
+      >
+        Home
+      </a>
+       | 
+      <a
+        href="/About"
+        style="color: white;"
+      >
+        About
+      </a>
+    </header>
+    <button
+      data-testid="scrape-button"
+    >
+      Get Events
+    </button>
+    <div
+      data-testid="events-list"
+    />
+  </div>
+</div>
+`;
+
+exports[`App Component renders 'Home' page correctly 1`] = `
+<div
+  class="App"
+  data-testid="app-component"
+>
+  <div
+    class="container"
+  >
+    <header
+      data-testid="header-component"
+      style="background-color: black; color: white; padding-bottom: 10px;"
+    >
+      <h1>
+        Astro Calendar
+      </h1>
+      <a
+        href="/"
+        style="color: white;"
+      >
+        Home
+      </a>
+       | 
+      <a
+        href="/About"
+        style="color: white;"
+      >
+        About
+      </a>
+    </header>
+    <button
+      data-testid="scrape-button"
+    >
+      Get Events
+    </button>
+    <div
+      data-testid="events-list"
+    >
+      <div
+        data-testid="event-obj-div"
+        style="background-color: rgb(219, 22, 22);"
+      >
+        <h2>
+          Cosmic Insanity
+        </h2>
+        <h3>
+          April 1
+        </h3>
+        <button>
+          Create Reminder
+        </button>
+      </div>
+      <div
+        data-testid="event-obj-div"
+        style="background-color: rgb(244, 244, 244);"
+      >
+        <h2>
+          Don't Look Up
+        </h2>
+        <h3>
+          April 2
+        </h3>
+        <button>
+          Create Reminder
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`App Component renders header correcty 1`] = `
+<header
+  data-testid="header-component"
+  style="background-color: black; color: white; padding-bottom: 10px;"
+>
+  <h1>
+    Astro Calendar
+  </h1>
+  <a
+    href="/"
+    style="color: white;"
+  >
+    Home
+  </a>
+   | 
+  <a
+    href="/About"
+    style="color: white;"
+  >
+    About
+  </a>
+</header>
+`;
