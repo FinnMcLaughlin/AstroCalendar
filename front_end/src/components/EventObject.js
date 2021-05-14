@@ -10,15 +10,31 @@ export class EventObject extends Component {
     }
 
     render() {
-        const { event_name, event_date, id } = this.props.event_info;
+        const { event_name, event_date, id, weather, visibility, temp } = this.props.event_info;
+
+        if(weather === undefined || visibility === undefined || temp === undefined){
+            return (
+                <div data-testid="event-obj-div" style= { this.getStyle() }>
+                    <h2>{event_name}</h2>
+                    <h3>{event_date}</h3>
+                    <button onClick={this.props.setReminder.bind(this, id)}>Create Reminder</button>
+                </div>
+            )
+        }
+        else{
+            return (
+                <div data-testid="event-obj-div" style= { this.getStyle() }>
+                    <h2>{event_name}</h2>
+                    <h3>{event_date}</h3>
+                    <h3>Weather: {weather}</h3>
+                    <h3>Visibility: {visibility}</h3>
+                    <h3>Temp: {temp}&deg;C</h3>
+                    <button onClick={this.props.setReminder.bind(this, id)}>Create Reminder</button>
+                </div>
+            )
+        }
         
-        return (
-            <div data-testid="event-obj-div" style= { this.getStyle() }>
-                <h2>{event_name}</h2>
-                <h3>{event_date}</h3>
-                <button onClick={this.props.setReminder.bind(this, id)}>Create Reminder</button>
-            </div>
-        )
+        
     }
 }
 

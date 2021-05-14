@@ -18,6 +18,8 @@ OAuth2Client.setCredentials({
     refresh_token: '<REFRESH TOKEN>'
 })
 
+const WEATHER_API_KEY = '<WEATHER_API_KEY>'
+
 const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
@@ -108,6 +110,17 @@ app.post("/reminder", (req, res) => {
         console.log("Calendar Event Busy for that date / time")
 
         return res.send("Calendar Event Busy for that date / time")
+    })
+})
+
+app.post("/weather", (req, res) => {
+    const city = req.body.city
+
+    const weather_url = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&APPID=${WEATHER_API_KEY}`
+    
+    request(weather_url, (err, resp, html) =>{
+        console.log(resp.body)
+        res.send(resp.body)
     })
 })
 
