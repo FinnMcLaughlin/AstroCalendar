@@ -18,7 +18,7 @@ OAuth2Client.setCredentials({
     refresh_token: '<REFRESH TOKEN>'
 })
 
-const WEATHER_API_KEY = '<WEATHER_API_KEY>'
+const WEATHER_API_KEY = `<WEATHER_API_KEY>`
 
 const express = require('express')
 const cors = require('cors')
