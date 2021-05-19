@@ -24,6 +24,7 @@ function AppendWeatherInfo(forecast_list, event_obj, event_date_full, event_date
         ...event_obj,
         weather: [{
             forecast_date: event_date_shorthand,
+            forecast_date_full: event_date_full,
             forecast: forecast_list[closest_date_index].weather[0].description,
             visibility: forecast_list[closest_date_index].clouds.all + "%",
             temp: forecast_list[closest_date_index].main.temp
@@ -33,6 +34,7 @@ function AppendWeatherInfo(forecast_list, event_obj, event_date_full, event_date
     else{
         event_obj.weather.push({
         forecast_date: event_date_shorthand,
+        forecast_date_full: event_date_full,
         forecast: forecast_list[closest_date_index].weather[0].description,
         visibility: forecast_list[closest_date_index].clouds.all + "%",
         temp: forecast_list[closest_date_index].main.temp
