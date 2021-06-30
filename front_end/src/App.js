@@ -43,7 +43,7 @@ class App extends Component {
   testWeatherEvent = () => {
     // Create fake event object
     var test_event = {
-      event_date: "May 19/20",
+      event_date: "Jul 02",
       event_details: "This moon was created solely for testing purposes and is privately owned by the McLaughlin corporation",
       event_name: "Mega Moon",
       id: 1,
@@ -164,7 +164,7 @@ class App extends Component {
   render(){
     return (
       <Router>
-        <div data-testid="app-component" className="App">
+        <div data-testid="app-component" className="App" style={pageStyle}>
           <div className="container">
             
             {/* Home Page */}
@@ -192,6 +192,10 @@ class App extends Component {
       </Router>
     );
   }
+}
+
+const pageStyle = {
+  backgroundColor: 'black'
 }
 
 export default App;

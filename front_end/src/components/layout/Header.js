@@ -11,13 +11,13 @@ function Header(){
 }
 
 const headerStyle = {
-    backgroundColor: 'black',
-    color: 'white',
+    backgroundColor: '#090428',
+    color: '#DFF649',
     paddingBottom: 10
 }
 
 const linkStyle = {
-    color: 'white'
+    color: '#DFF649'
 }
 
 export default Header;
